@@ -1,0 +1,6 @@
+{
+  "development": {
+    "storage": "db/linger.sqlite",
+    "dialect": "sqlite"
+  }
+}
