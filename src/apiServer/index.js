@@ -10,6 +10,7 @@ const authErrorHandler = require('./middleware/authErrorHandler')
 
 const config = require('./config.js')
 const publicApi = require('./routers/api')
+const adminApi = require('./routers/admin')
 
 const app = new Koa()
 
@@ -28,8 +29,9 @@ app.use(json({ pretty: false, param: 'pretty' }))
 
 app.use(responseHandler())
 app.use(authErrorHandler)
-app.use(koajwt({ secret: config.jwtSecret }).unless({ path: [/\/rest\/login/] }))
+app.use(koajwt({ secret: config.jwtSecret }).unless({ path: [/\/rest\/admin\/login/, /\/rest\/public/] }))
 app.use(publicApi.middleware())
+app.use(adminApi.middleware())
 
 app.listen(config.port, () => {
     console.info(`[Info] ${Date(Date.now()).toLocaleString()}: Linger service started on port: ${config.port}`)

@@ -1,5 +1,7 @@
 const dbController = require('../models')
 const { errorResolver } = require('./resolver')
+const axios = require('axios')
+const config = require('../config')
 
 const controller = {
     createUser: async (ctx, next) => {
@@ -15,12 +17,17 @@ const controller = {
     },
 
     getUser: async (ctx, next) => {
-        const { openid } = ctx.params
+        const { code } = ctx.params
 
         await errorResolver(async () => {
+            const { data: { openid } } = await axios.get(`https://api.weixin.qq.com/sns/jscode2session?appid=${config.appid}&secret=${config.secret}&js_code=${code}&grant_type=authorization_code`)
+
             const user = await dbController.getUser(openid)
 
-            ctx.send(user)
+            ctx.send({
+                user,
+                openid
+            })
         }, ctx)
 
         return next()
