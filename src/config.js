@@ -1,6 +1,6 @@
 const config = {
     dev: {
-        server: 'http://localhost:4444'
+        server: 'https://4444-c545b848-69b3-474b-a60d-4322399be614.ws-us02.gitpod.io'
     },
     prod: {
         server: ''

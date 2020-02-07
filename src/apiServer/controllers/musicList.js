@@ -11,7 +11,7 @@ const controller = {
             const musicList = await dbController.createMusicList(title, description, author, tag, cover)
 
             const musicListItem = []
-            list.forEach(item => {
+            list.forEach(async item => {
                 const res = await musicList.createMusic({ title: item.title, singer: item.singer, cover: item.cover, playUrl: item.playUrl })
                 musicListItem.push(res)
             })

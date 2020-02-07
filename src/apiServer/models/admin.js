@@ -1,6 +1,5 @@
 const database= require('../../../db/models')
 const admin = database.administrator
-const Op = database.Sequelize.Op
 
 const model = {
     findAdminById(userId) {

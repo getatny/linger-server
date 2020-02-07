@@ -59,3 +59,5 @@ const controller = {
         return next()
     },
 }
+
+module.exports = controller

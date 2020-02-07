@@ -5,13 +5,14 @@ const musicController = require('../controllers/music')
 const musicListController = require('../controllers/musicList')
 
 // =============================================================================================== administrators
-router.post('/login', administratorController.login)
-router.get('/administrator/:id', administratorController.getAdmin)
-router.get('/administrators/:page/:pageSize', administratorController.getAdmins)
+router.post('/login', adminController.login)
+router.get('/administrator/:id', adminController.getAdmin)
+router.get('/administrators/:page/:pageSize', adminController.getAdmins)
 
 // =============================================================================================== music
 router.get('/musics/:page/:pageSize', musicController.getMusics)
 router.post('/music', musicController.createMusic)
+router.put('/music', musicController.updateMusic)
 
 // =============================================================================================== musicList
 router.get('/musicLists/:page/:pageSize', musicListController.getMusicList)

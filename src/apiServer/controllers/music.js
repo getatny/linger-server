@@ -20,12 +20,24 @@ const controller = {
         const { page = 1, pageSize = 5 } = ctx.params
 
         await errorResolver(async () => {
-            const { count, rows: musics } = dbController.getMusics(parseInt(page), parseInt(pageSize))
+            const { count, rows: musics } = await dbController.getMusics(parseInt(page), parseInt(pageSize))
 
             ctx.send({
                 count,
                 musics
             })
+        }, ctx)
+
+        return next()
+    },
+
+    updateMusic: async (ctx, next) =>{
+        const { id, title, singer, cover, playUrl } = ctx.request.body
+
+        await errorResolver(async () => {
+            const music = await dbController.updateMusic(id, title, singer, cover, playUrl)
+
+            ctx.send(music)
         }, ctx)
 
         return next()

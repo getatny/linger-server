@@ -7,8 +7,9 @@ import '../styles/layout.less'
 const { Header, Content, Footer } = Layout
 
 const menus = [
-    { id: 'music', label: '单曲', link: '/music' },
-    { id: 'musicList', label: '歌单', link: '/music-list' }
+    { id: 'music', label: '单曲', link: '/' },
+    { id: 'musicList', label: '歌单', link: '/music-list' },
+    { id: 'article', label: '文章', link: '/article' }
 ]
 
 const LayoutComponent = (props) => {
