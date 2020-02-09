@@ -33,6 +33,6 @@ app.use(koajwt({ secret: config.jwtSecret }).unless({ path: [/\/rest\/admin\/log
 app.use(publicApi.middleware())
 app.use(adminApi.middleware())
 
-app.listen(config.port, () => {
+app.listen(config.port, '127.0.0.1', () => {
     console.info(`[Info] ${Date(Date.now()).toLocaleString()}: Linger service started on port: ${config.port}`)
 })

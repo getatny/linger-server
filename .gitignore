@@ -24,3 +24,4 @@ yarn-error.log*
 
 .idea
 db/linger.sqlite
+src/apiServer/config.js
