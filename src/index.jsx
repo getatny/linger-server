@@ -7,6 +7,7 @@ import { login } from "./store/actions"
 import * as serviceWorker from './serviceWorker';
 import Music from './pages/music'
 import Login from './pages/login'
+import Article from './pages/article'
 
 const PrivateRoute = ({ component: Component, isLogin, ...rest }) => {
     return (
@@ -50,6 +51,7 @@ function App() {
         <HashRouter>
             <Switch>
                 <PrivateRoute exact path='/' component={Music} isLogin={isLogin} />
+                <PrivateRoute exact path='/article' component={Article} isLogin={isLogin} />
                 <HideRoute exact path='/login' component={Login} isLogin={isLogin} />
             </Switch>
         </HashRouter>

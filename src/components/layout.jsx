@@ -3,6 +3,7 @@ import { Layout, Menu } from 'antd'
 import { withRouter } from 'react-router'
 import { useHistory } from 'react-router-dom'
 import '../styles/layout.less'
+import Logo from '../static/logo.png'
 
 const { Header, Content, Footer } = Layout
 
@@ -24,7 +25,9 @@ const LayoutComponent = (props) => {
     return (
         <Layout id='main-layout'>
             <Header>
-                <div className="logo" />
+                <div className="logo">
+                    <img src={Logo} alt='logo' />
+                </div>
                 <Menu theme='dark' mode='horizontal' style={{ lineHeight: '64px' }} selectedKeys={selectedMenu} onClick={({key}) => pushPathToHistory(key)}>
                     {menus.map(menu => (
                         <Menu.Item key={menu.id} title={menu.label}>{menu.label}</Menu.Item>

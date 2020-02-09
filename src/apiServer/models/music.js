@@ -17,6 +17,26 @@ const model = {
             offset: (page - 1) * pageSize,
             order: database.Sequelize.literal('createdAt DESC')
         })
+    },
+
+    deleteMusics(lists) {
+        return music.destroy({ where: {
+            [Op.or]: { id: lists }
+        } })
+    },
+
+    getMusic(musicId) {
+        return music.findOne({ where: { id: musicId } })
+    },
+
+    getMusicsWithFavorite(page = 1, pageSize = 5, userId) {
+        return music.findAndCountAll({
+            where: { musicListId: 0 },
+            include: { model: database.user, as: 'users', through: { where: { userId } }, attributes: ['id'] },
+            limit: pageSize,
+            offset: (page - 1) * pageSize,
+            order: database.Sequelize.literal('createdAt DESC')
+        })
     }
 }
 

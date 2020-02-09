@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {})
     musicList.associate = function (models) {
         musicList.hasMany(models.music)
-        musicList.belongsToMany(models.user, { as: 'musicLists', through: 'favoriteMusicList', foreignKey: 'musicListId' })
+        musicList.belongsToMany(models.user, { as: 'users', through: 'favoriteMusicList', foreignKey: 'musicListId' })
     }
     return musicList
 }

@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {})
     article.associate = function (models) {
-        article.belongsToMany(models.user, { as: 'articles', through: 'favoriteArticle', foreignKey: 'articleId' })
+        article.belongsToMany(models.user, { as: 'users', through: 'favoriteArticle', foreignKey: 'articleId' })
     }
     return article
 }

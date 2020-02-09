@@ -6,13 +6,23 @@ const model = {
         return musicList.create({ title, description, author, tag, cover })
     },
 
+    updateMusicList(id, title, description, author, tag, cover) {
+        return music.update({ title, description, author, tag, cover }, { where: { id } })
+    },
+
     getMusicLists(page = 1, pageSize = 5) {
         return musicList.findAndCountAll({
             limit: pageSize,
             offset: (page - 1) * pageSize,
             order: database.Sequelize.literal('createdAt DESC'),
-            include: { model: database.music, as: 'musics' }
+            include: { model: database.music, as: 'music' }
         })
+    },
+
+    deleteMusicLists(lists) {
+        return musicList.destroy({ where: {
+            [Op.or]: { id: lists }
+        } })
     }
 }
 

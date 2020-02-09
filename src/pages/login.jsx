@@ -5,6 +5,7 @@ import { login as loginEvent } from '../store/actions'
 import http from '../utils/http'
 import Config from '../config'
 import '../styles/login.less'
+import Logo from '../static/logo-black.png'
 
 const Password = Input.Password
 
@@ -55,7 +56,9 @@ const Login = (props) => {
     return (
         <div className="login-page">
             <div className="login-form">
-                <div className="logo" />
+                <div className="logo">
+                    <img src={Logo} alt='logo' />
+                </div>
                 <Form className="login-form-input" onSubmit={handleSubmit}>
                     <Form.Item>
                         {getFieldDecorator('username', {

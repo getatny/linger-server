@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {})
     music.associate = function (models) {
         music.belongsTo(models.musicList)
-        music.belongsToMany(models.user, { as: 'musics', through: 'favoriteMusic', foreignKey: 'musicId' })
+        music.belongsToMany(models.user, { as: 'users', through: 'favoriteMusic', foreignKey: 'musicId' })
     }
     return music
 }

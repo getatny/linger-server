@@ -31,6 +31,19 @@ const controller = {
         }, ctx)
 
         return next()
+    },
+
+    addFavoriteMusic: async (ctx, next) => {
+        const { userId, musicId } = ctx.params
+
+        await errorResolver(async () => {
+            const user = await dbController.getUserById(userId)
+            user.addMusic(musicId)
+
+            ctx.send()
+        }, ctx)
+
+        return next()
     }
 }
 

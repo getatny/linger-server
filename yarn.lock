@@ -917,6 +917,18 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@ckeditor/ckeditor5-build-classic@^16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-16.0.0.tgz#9141e94ea6765eda4925aaf062448507410bbe70"
+  integrity sha512-gBfZqWg3hmCvhq6/wX5UJp4qwl6gB+NJPpOkya2Y3jWKA0HKf3UdlhIvaHq7dRaqhi4unmqaJZVEk5VpZ1vDOg==
+
+"@ckeditor/ckeditor5-react@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-react/-/ckeditor5-react-2.1.0.tgz#f612546a5a328899a436d71b72ffd632600049e8"
+  integrity sha512-rlHjRKhwP9tNK0Yj2UJShL14mRfxLPgJ+Pv6zTv/Mvmd4wrwGnJf+5ybOAGK92S02hP1cXH+9km+PRO1b4V+ng==
+  dependencies:
+    prop-types "^15.6.1"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npm.taobao.org/@cnakazawa/watch/download/@cnakazawa/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -9174,7 +9186,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.3"
 
-prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@15.x, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npm.taobao.org/prop-types/download/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha1-UsQedbjIfnK52TYOAga5ncv/psU=
