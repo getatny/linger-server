@@ -16,7 +16,7 @@ const app = new Koa()
 
 app.use(logger())
 app.use(bodyParser())
-app.use(serve('dist'))
+app.use(serve('build'))
 app.use(cors({
     origin: function(ctx) {
         let isWhiteList = null
