@@ -44,6 +44,19 @@ const controller = {
         }, ctx)
 
         return next()
+    },
+
+    deleteFavoriteMusic: async (ctx, next) => {
+        const { userId, musicId } = ctx.params
+
+        await errorResolver(async () => {
+            const user = await dbController.getUserById(userId)
+            user.removeMusic(musicId)
+
+            ctx.send()
+        }, ctx)
+
+        return next()
     }
 }
 

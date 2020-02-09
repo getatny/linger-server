@@ -17,6 +17,7 @@ router.get('/index', musicController.getIndexData)
 router.get('/index/:userId', musicController.getIndexData)
 
 router.post('/user/:userId/music/:musicId', userController.addFavoriteMusic)
+router.post('/user/:userId/music/:musicId/delete', userController.deleteFavoriteMusic)
 
 const api = Router({ prefix: '/rest/public' }).extend(router)
 

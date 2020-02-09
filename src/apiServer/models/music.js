@@ -32,7 +32,7 @@ const model = {
     getMusicsWithFavorite(page = 1, pageSize = 5, userId) {
         return music.findAndCountAll({
             where: { musicListId: 0 },
-            include: { model: database.user, as: 'users', through: { where: { userId } }, attributes: ['id'] },
+            include: { model: database.user, as: 'users', attributes: ['id'] },
             limit: pageSize,
             offset: (page - 1) * pageSize,
             order: database.Sequelize.literal('createdAt DESC')
