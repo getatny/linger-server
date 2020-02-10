@@ -7,7 +7,7 @@ const model = {
     },
 
     updateMusicList(id, title, description, author, tag, cover) {
-        return music.update({ title, description, author, tag, cover }, { where: { id } })
+        return musicList.update({ title, description, author, tag, cover }, { where: { id } })
     },
 
     getMusicLists(page = 1, pageSize = 5) {
@@ -23,6 +23,10 @@ const model = {
         return musicList.destroy({ where: {
             [Op.or]: { id: lists }
         } })
+    },
+
+    getMusicList(id) {
+        return musicList.findOne({ where: { id } })
     }
 }
 

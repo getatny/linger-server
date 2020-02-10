@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import Music from './pages/music'
 import Login from './pages/login'
 import Article from './pages/article'
+import MusicList from './pages/musicList'
 
 const PrivateRoute = ({ component: Component, isLogin, ...rest }) => {
     return (
@@ -52,6 +53,7 @@ function App() {
             <Switch>
                 <PrivateRoute exact path='/' component={Music} isLogin={isLogin} />
                 <PrivateRoute exact path='/article' component={Article} isLogin={isLogin} />
+                <PrivateRoute exact path='/music-list' component={MusicList} isLogin={isLogin} />
                 <HideRoute exact path='/login' component={Login} isLogin={isLogin} />
             </Switch>
         </HashRouter>

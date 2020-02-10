@@ -137,7 +137,8 @@ const Music = () => {
 
         if (addingRecord) {
             message.success('添加单曲成功！')
-            setMusicData(musicData.unshift(res))
+            musicData.unshift(res)
+            setMusicData(musicData)
         } else if (edittingRecord) {
             message.success('修改歌曲信息成功！')
             setMusicData(musicData.map(item => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import LayoutComponent from "../components/layout"
 import { PageHeader, Button, Popconfirm, Spin, Table, Tag, Typography, Form, Input, Row, Col, message, Modal } from 'antd'
 import http from '../utils/http'
@@ -125,14 +125,14 @@ const Article = () => {
     const [ edittingRecord, setedittingRecordStatus ] = useState(false)
 
     const onDeleteConfirm = (id) => {
-        http.post(`${config.server}/rest/admin/musics/delete`, {
+        http.post(`${config.server}/rest/admin/articles/delete`, {
             list: [id]
         }).then(() => {
-            message.success('删除单曲成功！')
+            message.success('删除文章成功！')
             setArticleData(articleData.filter(item => item.id !== id))
         }).catch(err => {
             console.log(err)
-            message.error('删除单曲失败！')
+            message.error('删除文章失败！')
         })
     }
 
@@ -147,7 +147,8 @@ const Article = () => {
 
         if (addingRecord) {
             message.success('添加文章成功！')
-            setArticleData(articleData.unshift(res))
+            articleData.unshift(res)
+            setArticleData(articleData)
         } else if (edittingRecord) {
             message.success('修改文章内容成功！')
             setArticleData(articleData.map(item => {
@@ -178,6 +179,9 @@ const Article = () => {
 
     const columns = [
         { title: 'id', dataIndex: 'id', key: 'id' },
+        { title: '封面', dataIndex: 'cover', key: 'cover', render: (text, record) => (
+            <img src={text} alt={`${record.title} - cover`} style={{ width: 60, height: 60, overflow: 'hidden' }} />
+        ) },
         { title: '文章标题', dataIndex: 'title', key: 'title' },
         { title: '作者', dataIndex: 'author', key: 'author' },
         { title: '标签', dataIndex: 'tag', key: 'tag', render: tag => (<Tag color='#2db7f5'>{tag}</Tag>) },
@@ -217,7 +221,7 @@ const Article = () => {
 
             <div className="main-content">
                 <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => setAddingRecordStatus(true)}>新增文章</Button>
-                {selectedData.length > 0 ? <Popconfirm placement='top' title='确定删除所选单曲？' onConfirm={() => onDeleteConfirm(1)} okText='确定' cancelText='取消'>
+                {selectedData.length > 0 ? <Popconfirm placement='top' title='确定删除所选文章？' onConfirm={() => onDeleteConfirm(1)} okText='确定' cancelText='取消'>
                     <Button type="danger" icon="delete">批量删除</Button>
                 </Popconfirm> : null}
                 <Spin spinning={articleData === null}>
@@ -226,7 +230,7 @@ const Article = () => {
             </div>
         </div>
 
-        <Modal title={addingRecord ? '新增单曲' : edittingRecord ? '编辑单曲' : ''} visible={addingRecord || edittingRecord} width='90%' footer={null} onCancel={closeModal}>
+        <Modal title={addingRecord ? '新增文章' : edittingRecord ? '编辑文章' : ''} visible={addingRecord || edittingRecord} width='90%' footer={null} onCancel={closeModal}>
             <ArticleInfoForm info={editObject} onCancel={closeModal} onUpdateSuccess={onUpdateSuccess} onUpdateFailed={onUpdateFailed} />
         </Modal>
     </LayoutComponent>
