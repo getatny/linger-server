@@ -1,7 +1,5 @@
 const dbController = require('../models')
 const { errorResolver } = require('./resolver')
-const axios = require('axios')
-const config = require('../config')
 
 const controller = {
     createMusic: async (ctx, next) => {
@@ -44,29 +42,11 @@ const controller = {
     },
 
     deleteMusics: async (ctx, next) => {
-        const { lists } = ctx.request.body
+        const { list } = ctx.request.body
 
         await errorResolver(async () => {
-            const affectedCount = await dbController.deleteMusics(lists)
+            const affectedCount = await dbController.deleteMusics(list)
             ctx.send(affectedCount)
-        }, ctx)
-
-        return next()
-    },
-
-    getIndexData: async (ctx, next) => {
-        const { userId = null } = ctx.params
-
-        await errorResolver(async () => {
-            const { musicCount, rows: musics } = userId ?  await dbController.getMusicsWithFavorite(1, 5, userId) : await dbController.getMusics(1, 5)
-            const { musicListCount, rows: musicLists } = await dbController.getMusicLists(1, 5)
-
-            ctx.send({
-                musicCount,
-                musics,
-                musicListCount,
-                musicLists
-            })
         }, ctx)
 
         return next()

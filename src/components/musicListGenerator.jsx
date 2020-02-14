@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Row, Col, Card, Icon, Form, Input, Button, message, Modal } from 'antd'
 import '../styles/musicListGenerator.less'
 
@@ -71,7 +71,7 @@ const MusicListGeneratorForm = Form.create({ name: 'music-list-generator-info' }
 
 const MusicListGenerator = (props) => {
 
-    const [ musicList, setMusicList ] = useState(props.musics)
+    const [ musicList, setMusicList ] = useState([])
     const [ editObject, setEditObject ] = useState({})
     const [ addingRecord, setAddingRecordStatus ] = useState(false)
     const [ edittingRecord, setedittingRecordStatus ] = useState(false)
@@ -116,6 +116,10 @@ const MusicListGenerator = (props) => {
     useEffect(() => {
          props.onMusicListChanged(musicList)
     }, [musicList])
+
+    useMemo(() => {
+        setMusicList(props.musics)
+    }, [props.musics])
 
     return <>
         <Row gutter={16}>

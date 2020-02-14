@@ -106,6 +106,7 @@ const MusicInfoForm = Form.create({ name: 'music-info' })((props) => {
 const Music = () => {
 
     const [ musicData, setMusicData ] = useState(null)
+    const [ musicDataCount, setMusicDataCount ] = useState(0)
     const [ editObject, setEditObject ] = useState({})
     const [ addingRecord, setAddingRecordStatus ] = useState(false)
     const [ edittingRecord, setedittingRecordStatus ] = useState(false)
@@ -214,6 +215,7 @@ const Music = () => {
     useEffect(() => {
         http.get(`${config.server}/rest/admin/musics/1/15`).then(res => {
             setMusicData(res.musics)
+            setMusicDataCount(res.count)
         })
     }, [])
 
@@ -226,12 +228,12 @@ const Music = () => {
             }} title="音乐列表" subTitle="单曲推荐列表，歌单包含的单曲不会显示在这里" />
 
             <div className="main-content">
-                <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => setAddingRecordStatus(true)}>新增推荐单曲</Button>
+                <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => { setAddingRecordStatus(true); setEditObject({}) }}>新增推荐单曲</Button>
                 {selectedData.length > 0 ? <Popconfirm placement='top' title='确定删除所选单曲？' onConfirm={() => onDeleteConfirm(1)} okText='确定' cancelText='取消'>
                     <Button type="danger" icon="delete">批量删除</Button>
                 </Popconfirm> : null}
                 <Spin spinning={musicData === null}>
-                    <Table columns={columns} dataSource={musicData} rowSelection={rowSelection} rowKey='id' />
+                    <Table columns={columns} dataSource={musicData} rowSelection={rowSelection} rowKey='id' pagination={{ pageSize: 15, total: musicDataCount, hideOnSinglePage: true }} />
                 </Spin>
                 <audio ref={musicPlayer} />
             </div>

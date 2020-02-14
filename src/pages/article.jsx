@@ -61,7 +61,7 @@ const ArticleInfoForm = Form.create({ name: 'article-info' })((props) => {
         const { title, description, author, tag, cover, content } = props.info
 
         props.form.setFieldsValue({ title, description, author, tag, cover })
-        setArticleContent(content)
+        content ? setArticleContent(content) : setArticleContent('')
     }, [props.info])
 
     return <Form className='article-info-form' onSubmit={onFormSubmit}>
@@ -220,7 +220,7 @@ const Article = () => {
             }} title="文章列表" subTitle="文章推荐列表" />
 
             <div className="main-content">
-                <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => setAddingRecordStatus(true)}>新增文章</Button>
+                <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => { setAddingRecordStatus(true); setEditObject({}) }}>新增文章</Button>
                 {selectedData.length > 0 ? <Popconfirm placement='top' title='确定删除所选文章？' onConfirm={() => onDeleteConfirm(1)} okText='确定' cancelText='取消'>
                     <Button type="danger" icon="delete">批量删除</Button>
                 </Popconfirm> : null}

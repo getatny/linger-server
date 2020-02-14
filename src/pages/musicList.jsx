@@ -71,7 +71,7 @@ const MusicListInfoForm = Form.create({ name: 'music-list-info' })((props) => {
         const { title, description, author, tag, cover, music } = props.info
 
         props.form.setFieldsValue({ title, description, author, tag, cover })
-        music && setMusicList(music)
+        music ? setMusicList(music) : setMusicList([])
     }, [props.info])
 
     return <Form className='music-list-info-form' onSubmit={onFormSubmit}>
@@ -135,6 +135,7 @@ const MusicListInfoForm = Form.create({ name: 'music-list-info' })((props) => {
 const MusicList = () => {
 
     const [ musicListData, setMusicListData ] = useState(null)
+    const [ musicListDataCount, setMusicListDataCount ] = useState(0)
     const [ editObject, setEditObject ] = useState({})
     const [ addingRecord, setAddingRecordStatus ] = useState(false)
     const [ edittingRecord, setedittingRecordStatus ] = useState(false)
@@ -221,6 +222,7 @@ const MusicList = () => {
     useEffect(() => {
         http.get(`${config.server}/rest/admin/musicLists/1/15`).then(res => {
             setMusicListData(res.musicLists)
+            setMusicListDataCount(res.count)
         })
     }, [])
     
@@ -233,12 +235,12 @@ const MusicList = () => {
             }} title="歌单列表" subTitle="新增、编辑歌单" />
 
             <div className="main-content">
-                <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => setAddingRecordStatus(true)}>新增歌单</Button>
+                <Button type='primary' icon='plus' style={{ marginRight: 10, marginBottom: 20 }} onClick={() => { setAddingRecordStatus(true); setEditObject({}) }}>新增歌单</Button>
                 {selectedData.length > 0 ? <Popconfirm placement='top' title='确定删除所选歌单？' onConfirm={() => onDeleteConfirm(1)} okText='确定' cancelText='取消'>
                     <Button type="danger" icon="delete">批量删除</Button>
                 </Popconfirm> : null}
                 <Spin spinning={musicListData === null}>
-                    <Table columns={columns} dataSource={musicListData} rowSelection={rowSelection} rowKey='id' />
+                    <Table columns={columns} dataSource={musicListData} rowSelection={rowSelection} rowKey='id' pagination={{ pageSize: 15, total: musicListDataCount, hideOnSinglePage: true }} />
                 </Spin>
             </div>
         </div>
