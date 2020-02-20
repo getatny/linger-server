@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {})
     user.associate = function (models) {
-        user.belongsToMany(models.music, { as: 'musics', through: 'favoriteMusic', foreignKey: 'userId' })
+        user.belongsToMany(models.music, { through: 'favoriteMusic', foreignKey: 'userId' })
     }
     return user
 }

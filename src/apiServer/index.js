@@ -5,6 +5,7 @@ const serve = require('koa-static')
 const cors = require('@koa/cors')
 const json = require('koa-json')
 const koajwt = require('koa-jwt')
+const compress = require('koa-compress')
 const responseHandler = require('./middleware/responseHandler')
 const authErrorHandler = require('./middleware/authErrorHandler')
 
@@ -16,6 +17,12 @@ const app = new Koa()
 
 app.use(logger())
 app.use(bodyParser())
+app.use(compress({
+    filter: function (content_type) {
+        return /javascript/i.test(content_type)
+    },
+    threshold: 2048
+}))
 app.use(serve('build'))
 app.use(cors({
     origin: function(ctx) {
